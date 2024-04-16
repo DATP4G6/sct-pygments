@@ -1,0 +1,24 @@
+\documentclass{minimal}
+\usepackage[cache=false]{minted}
+
+\begin{document}
+\begin{minted}{'lexer.py -x'}
+class Foo(int x) {
+    decorator Bar {
+        x = x - 1;
+    }
+
+    @Bar
+    state Baz {
+        if (exists(Foo::?(x: 3))) {
+            destroy;
+        }
+        enter Baz;
+    }
+}
+
+function Setup() -> void {
+    create Foo::Baz(x: 5);
+}
+\end{minted}
+\end{document}
