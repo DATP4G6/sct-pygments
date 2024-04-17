@@ -1,4 +1,4 @@
-from pygments.lexer import RegexLexer
+from pygments.lexer import RegexLexer, bygroups
 from pygments.token import *
 
 class CustomLexer(RegexLexer):
@@ -12,13 +12,10 @@ class CustomLexer(RegexLexer):
             (r'//[^\r\n]*', Comment.Single,),
             (r'[ \t\r\n]+', Whitespace,),
             
-            (r'function', Keyword.Declaration,),
-            (r'->', Punctuation,),
             (r'int', Keyword.Type),
             (r'float', Keyword.Type),
             (r'void', Keyword.Type),
 
-            (r'=', Operator,),
             (r'if', Keyword.Reserved,),
             (r'else', Keyword.Reserved,),
             (r'while', Keyword.Reserved,),
@@ -29,8 +26,8 @@ class CustomLexer(RegexLexer):
             (r'exit', Keyword.Reserved,),
             (r'continue', Keyword.Reserved,),
             (r'break', Keyword.Reserved,),
-
             
+            (r'=', Operator,),
             (r'\*', Operator,),
             (r'/', Operator,),
             (r'\+', Operator,),
@@ -47,12 +44,25 @@ class CustomLexer(RegexLexer):
             (r'!', Operator,),
 
             (r'class', Keyword.Declaration,),
+            (r'(?<=class )\w+', Name.Constant,),
+
+            # predicates
+            (r'(\w+)(::)(\w+)', bygroups(Name.Constant, Punctuation, Name.Label),),
+            (r'(\w+)(::)(\?)', bygroups(Name.Constant, Punctuation, Keyword.Pseudo),),
+
             (r'state', Keyword.Declaration,),
+            (r'(?<=state )\w+', Name.Label,),
+            (r'(?<=enter )\w+', Name.Label,),
+
             (r'decorator', Keyword.Declaration,),
-            (r'@', Punctuation,),
+            (r'(?<=decorator )\w+', Name.Decorator,),
+            (r'@\w+', Name.Decorator,),
 
+            (r'function', Keyword.Declaration,),
+            (r'(?<=function )\w+', Name.Function,),
+            (r'(?<!::)\w+(?=\()', Name.Function,), # invoke function
 
-            (r'\?', Name.Builtin,),
+            (r'->', Punctuation,),
             (r'\(', Punctuation,),
             (r'\)', Punctuation,),
             (r'{', Punctuation,),

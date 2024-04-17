@@ -2,7 +2,7 @@
 \usepackage[cache=false]{minted}
 
 \begin{document}
-\begin{minted}{'lexer.py -x'}
+\begin{minted}{'SctLexer.py -x'}
 class Foo(int x) {
     decorator Bar {
         x = x - 1;
@@ -10,8 +10,13 @@ class Foo(int x) {
 
     @Bar
     state Baz {
+        float yess = 3.5;
+
         if (exists(Foo::?(x: 3))) {
             destroy;
+        }
+        else if (exists(Foo::Baz())) {
+            create Foo::Baz(x: 6);
         }
         enter Baz;
     }
