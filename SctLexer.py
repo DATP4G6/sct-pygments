@@ -15,12 +15,12 @@ class CustomLexer(RegexLexer):
             (r'int', Keyword.Type),
             (r'float', Keyword.Type),
             (r'void', Keyword.Type),
+            (r'Predicate', Keyword.Type),
 
             (r'if', Keyword.Reserved,),
             (r'else', Keyword.Reserved,),
             (r'while', Keyword.Reserved,),
             (r'return', Keyword.Reserved,),
-            (r'enter', Keyword.Reserved,),
             (r'create', Keyword.Reserved,),
             (r'destroy', Keyword.Reserved,),
             (r'exit', Keyword.Reserved,),
@@ -43,23 +43,19 @@ class CustomLexer(RegexLexer):
             (r'<=', Operator,),
             (r'!', Operator,),
 
-            (r'class', Keyword.Declaration,),
-            (r'(?<=class )\w+', Name.Constant,),
+            (r'(species)(\s+)(\w+)', bygroups(Keyword.Declaration, Token.Text.Whitespace, Name.Constant),),
 
             # predicates
             (r'(\w+)(::)(\w+)', bygroups(Name.Constant, Punctuation, Name.Label),),
             (r'(\w+)(::)(\?)', bygroups(Name.Constant, Punctuation, Keyword.Pseudo),),
 
-            (r'state', Keyword.Declaration,),
-            (r'(?<=state )\w+', Name.Label,),
-            (r'(?<=enter )\w+', Name.Label,),
+            (r'(state)(\s+)(\w+)', bygroups(Keyword.Declaration, Token.Text.Whitespace, Name.Label)),
+            (r'(enter)(\s+)(\w+)', bygroups(Keyword.Reserved, Token.Text.Whitespace, Name.Label)),
 
-            (r'decorator', Keyword.Declaration,),
-            (r'(?<=decorator )\w+', Name.Decorator,),
+            (r'(decorator)(\s+)(\w+)', bygroups(Keyword.Declaration, Token.Text.Whitespace, Name.Decorator)),
             (r'@\w+', Name.Decorator,),
 
-            (r'function', Keyword.Declaration,),
-            (r'(?<=function )\w+', Name.Function,),
+            (r'(function)(\s+)(\w+)', bygroups(Keyword.Declaration,Token.Text.Whitespace, Name.Function),),
             (r'(?<!::)\w+(?=\()', Name.Function,), # invoke function
 
             (r'->', Punctuation,),
