@@ -18,6 +18,7 @@ class CustomLexer(RegexLexer):
             (r'Predicate', Keyword.Type),
 
             (r'if(?=\s*\()', Keyword.Reserved,),
+            (r'else if(?=\s*\()', Keyword.Reserved,),
             (r'else(?=\s*\{)', Keyword.Reserved,),
             (r'while(?=\s*\()', Keyword.Reserved,),
             (r'return(?=\s+)', Keyword.Reserved,),
