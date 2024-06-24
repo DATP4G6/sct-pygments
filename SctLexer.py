@@ -11,7 +11,7 @@ class CustomLexer(RegexLexer):
         'root': [
             (r'//[^\r\n]*', Comment.Single,),
             (r'[ \t\r\n]+', Whitespace,),
-            
+
             (r'int', Keyword.Type),
             (r'float', Keyword.Type),
             (r'void', Keyword.Type),
@@ -27,7 +27,8 @@ class CustomLexer(RegexLexer):
             (r'exit(?=\s*;)', Keyword.Reserved,),
             (r'continue(?=\s*;)', Keyword.Reserved,),
             (r'break(?=\s*;)', Keyword.Reserved,),
-            
+            (r'#', Keyword.Reserved,),
+
             (r'=', Operator,),
             (r'\*', Operator,),
             (r'/', Operator,),
@@ -52,6 +53,7 @@ class CustomLexer(RegexLexer):
 
             (r'(state)(\s+)(\w+)', bygroups(Keyword.Declaration, Token.Text.Whitespace, Name.Label)),
             (r'(enter)(\s+)(\w+)', bygroups(Keyword.Reserved, Token.Text.Whitespace, Name.Label)),
+            (r'(=>)(\s+)(\w+)', bygroups(Punctuation, Token.Text.Whitespace, Name.Label)),
 
             (r'(decorator)(\s+)(\w+)', bygroups(Keyword.Declaration, Token.Text.Whitespace, Name.Decorator)),
             (r'@\w+', Name.Decorator,),
